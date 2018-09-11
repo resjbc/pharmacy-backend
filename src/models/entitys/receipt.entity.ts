@@ -7,7 +7,6 @@ export class EReceipt {
 
     @PrimaryGeneratedColumn() id_receipt?: number;
 
-
     @Column()
     @IsNotEmpty()
     customer: string;
@@ -28,7 +27,7 @@ export class EReceipt {
 
     @Column()
     @IsNotEmpty()
-    date_create: Date;
+    date_created: Date;
 
     @Column()
     date_updated?: Date;

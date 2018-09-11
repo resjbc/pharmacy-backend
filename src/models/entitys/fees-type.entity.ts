@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 import { IsNotEmpty } from "class-validator";
 
 @Entity()
@@ -13,6 +13,8 @@ export class ETypeFees {
 
 }
 
+
+@Entity()
 export class EGroupFees {
 
 
@@ -30,6 +32,7 @@ export class EGroupFees {
 
 }
 
+@Entity()
 export class EListFees {
 
 
