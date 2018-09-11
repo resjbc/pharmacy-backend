@@ -2,26 +2,26 @@ import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyT
 import { IsNotEmpty } from "class-validator";
 
 
-@Entity()
+@Entity('Receipt')
 export class EReceipt {
 
     @PrimaryGeneratedColumn() id_receipt?: number;
 
-    @Column()
+    @Column('text')
     @IsNotEmpty()
     customer: string;
 
 
-    @Column()
+    @Column('text')
     @IsNotEmpty()
     receipt_detail: string;
 
 
-    @Column()
+    @Column('text')
     @IsNotEmpty()
     act: string;
 
-    @Column()
+    @Column('text')
     @IsNotEmpty()
     member_create: string;
 
@@ -32,30 +32,34 @@ export class EReceipt {
     @Column()
     date_updated?: Date;
 
-    @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt)
-    receiptDetails: EReceiptDetail[];
+    /*@OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt)
+    receiptDetails: EReceiptDetail[];*/
 
 
 }
 
 
-@Entity()
+@Entity('ReceiptDetail')
 export class EReceiptDetail {
 
-    @PrimaryColumn('int')
+    @PrimaryColumn()
     @IsNotEmpty()
-     id_receipt_detail: number;
+    id_receipt_detail: number;
 
-    @PrimaryColumn('int')
+    @PrimaryColumn()
     @IsNotEmpty()
-     id_receipt: number;
+    id_receipt: number;
 
-     @Column('int')
-     @IsNotEmpty()
-     qty: number;
+    @Column('text')
+    @IsNotEmpty()
+    list: string;
+
+    @Column('int')
+    @IsNotEmpty()
+    qty: number;
 
 
-    @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails)
-    receipt: EReceipt;
+    /*@ManyToOne(type => EReceipt, receipt => receipt.receiptDetails)
+    receipt: EReceipt;*/
 
 }

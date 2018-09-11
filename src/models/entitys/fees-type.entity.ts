@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 import { IsNotEmpty } from "class-validator";
 
-@Entity()
+@Entity('TypeFees')
 export class ETypeFees {
 
     @PrimaryGeneratedColumn()
@@ -14,7 +14,7 @@ export class ETypeFees {
 }
 
 
-@Entity()
+@Entity('GroupFees')
 export class EGroupFees {
 
 
@@ -32,7 +32,7 @@ export class EGroupFees {
 
 }
 
-@Entity()
+@Entity('ListFees')
 export class EListFees {
 
 
