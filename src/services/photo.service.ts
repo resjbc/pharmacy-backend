@@ -2,7 +2,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Photo } from '../models/entitys/photo.entity';
-import { validate } from 'class-validator';
+
 
 @Injectable()
 export class PhotoService {
@@ -16,9 +16,9 @@ export class PhotoService {
   }
 
   async insertPhoto(photo: Photo) {
-    
-
-    return photo;
+    const photoInsert = await this.photoRepository.insert(photo);
+    console.log(photoInsert.raw[0].id);
+    return photoInsert;
   }
 
    

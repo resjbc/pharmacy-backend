@@ -17,8 +17,7 @@ export class ValidationPipe implements PipeTransform<any> {
             //throw new BadRequestException(errors)
             if (constraints.length > 0) {
                 const constraint = constraints[0];
-                const message = Object.keys(constraint)
-                    .map(key => constraint[key]);
+                const message = Object.keys(constraint).map(key => constraint[key]);
                 if (message.length > 0) {
                     throw new BadRequestException(message[message.length - 1]);
                 }

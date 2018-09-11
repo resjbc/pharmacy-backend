@@ -1,11 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
 import { IPhoto } from '../../interfaces/photo.interface';
 import { IsNotEmpty } from "class-validator";
 
 @Entity()
 export class Photo implements IPhoto {
   @PrimaryGeneratedColumn() id: number;
-
 
   @Column({ length: 500 })
   @IsNotEmpty()
