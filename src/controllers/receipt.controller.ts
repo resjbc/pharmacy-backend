@@ -1,20 +1,22 @@
-import { Controller, Get, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, BadRequestException, Param } from '@nestjs/common';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { ReceiptService } from 'services/receipt.service';
-import { EReceipt } from 'models/entitys/receipt.entity';
+import { IReceipt } from '../interfaces/app.interface';
+import { ParamReceipt } from '../models/entitys/receipt.entity';
+
 
 
 @Controller('receipt')
 export class ReceiptController {
-  constructor(private readonly receiptService: ReceiptService) {}
+    constructor(private readonly receiptService: ReceiptService) { }
 
-  @Get()
-  findAll() {
-    return this.receiptService.findAll();
-  }
+    @Get(':id')
+    findAll(@Param(new ValidationPipe()) param: ParamReceipt) {
+        return this.receiptService.findAll(param.id);
+    }
 
-  @Post('add')
-  insertPhoto(@Body(new ValidationPipe()) body:EReceipt) {
-    return this.receiptService.insertReceipt(body);
-  }
+    @Post('add')
+    insertPhoto(@Body(new ValidationPipe()) body: IReceipt) {
+        return this.receiptService.insertReceipt(body);
+    }
 }

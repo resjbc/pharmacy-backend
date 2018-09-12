@@ -1,65 +1,62 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne } from 'typeorm';
 import { IsNotEmpty } from "class-validator";
+import { IReceipt, IReceiptDetail } from '../../interfaces/app.interface';
 
 
 @Entity('Receipt')
-export class EReceipt {
+export class EReceipt implements IReceipt {
 
-    @PrimaryGeneratedColumn() id_receipt?: number;
+    @PrimaryGeneratedColumn()
+    id_receipt?;
 
-    @Column('text')
+    @Column()
     @IsNotEmpty()
-    customer: string;
+    id_customer: number;
 
-
-    @Column('text')
+    @Column()
     @IsNotEmpty()
-    receipt_detail: string;
+    id_act: number;
 
-
-    @Column('text')
+    @Column()
     @IsNotEmpty()
-    act: string;
-
-    @Column('text')
-    @IsNotEmpty()
-    member_create: string;
+    id_member_create: number;
 
     @Column()
     @IsNotEmpty()
     date_created: Date;
 
     @Column()
-    date_updated?: Date;
+    date_updated: Date;
 
-    /*@OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt)
-    receiptDetails: EReceiptDetail[];*/
+    @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.id_receipt)
+    receiptDetails: EReceiptDetail[];
 
 
 }
 
 
 @Entity('ReceiptDetail')
-export class EReceiptDetail {
+export class EReceiptDetail implements IReceiptDetail {
 
     @PrimaryColumn()
     @IsNotEmpty()
-    id_receipt_detail: number;
+    id_list: number;
 
     @PrimaryColumn()
     @IsNotEmpty()
     id_receipt: number;
 
-    @Column('text')
-    @IsNotEmpty()
-    list: string;
 
-    @Column('int')
+    @Column()
     @IsNotEmpty()
     qty: number;
 
+    @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails)
+    receipt: EReceipt;
 
-    /*@ManyToOne(type => EReceipt, receipt => receipt.receiptDetails)
-    receipt: EReceipt;*/
+}
 
+export class ParamReceipt {
+    @IsNotEmpty()
+    id: number
 }
