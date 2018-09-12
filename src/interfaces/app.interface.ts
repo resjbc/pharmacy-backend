@@ -2,7 +2,7 @@
 export class IReceipt {
     id_receipt?:number;
     id_customer: number;
-    id_act: number;
+    //id_act: number;
     id_member_create: number;
     date_created: Date;
     date_updated: Date;
@@ -11,8 +11,10 @@ export class IReceipt {
 //รายการในใบเสร็จ
 export class IReceiptDetail {
     id_list: number;
-    id_receipt: number;
+    list: string;
+    id_receipt_detail?: number;
     qty: number;
+    price: number;
 }
 
 //พรบ

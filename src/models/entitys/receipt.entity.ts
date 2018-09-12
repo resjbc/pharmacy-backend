@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { IsNotEmpty } from "class-validator";
 import { IReceipt, IReceiptDetail } from '../../interfaces/app.interface';
+import { EAct } from './act.entity';
 
 
 @Entity('Receipt')
@@ -15,10 +16,6 @@ export class EReceipt implements IReceipt {
 
     @Column()
     @IsNotEmpty()
-    id_act: number;
-
-    @Column()
-    @IsNotEmpty()
     id_member_create: number;
 
     @Column()
@@ -28,9 +25,13 @@ export class EReceipt implements IReceipt {
     @Column()
     date_updated: Date;
 
-    @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.id_receipt)
+    @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt , { nullable: false })
     receiptDetails: EReceiptDetail[];
 
+
+    @OneToOne(type => EAct ,act => act.receipt, { nullable: false })
+    @JoinColumn({ name: 'id_act' })
+    act: EAct
 
 }
 
@@ -38,20 +39,30 @@ export class EReceipt implements IReceipt {
 @Entity('ReceiptDetail')
 export class EReceiptDetail implements IReceiptDetail {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
+    id_receipt_detail?;
+
+
+    @Column()
     @IsNotEmpty()
     id_list: number;
 
-    @PrimaryColumn({ name: 'id_receipt', type: 'int' })
+
+    @Column('text')
     @IsNotEmpty()
-    id_receipt: number;
+    list: string;
 
 
     @Column()
     @IsNotEmpty()
     qty: number;
 
-    @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails)
+    @Column()
+    @IsNotEmpty()
+    price: number;
+
+
+    @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails , { nullable: false })
     @JoinColumn({ name: 'id_receipt' })
     receipt: EReceipt;
 
