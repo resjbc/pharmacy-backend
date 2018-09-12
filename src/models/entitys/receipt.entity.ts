@@ -42,7 +42,7 @@ export class EReceiptDetail implements IReceiptDetail {
     @IsNotEmpty()
     id_list: number;
 
-    @PrimaryColumn()
+    @PrimaryColumn({ name: 'id_receipt', type: 'int' })
     @IsNotEmpty()
     id_receipt: number;
 
