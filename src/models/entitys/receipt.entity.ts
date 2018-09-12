@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { IsNotEmpty } from "class-validator";
 import { IReceipt, IReceiptDetail } from '../../interfaces/app.interface';
 
@@ -52,6 +52,7 @@ export class EReceiptDetail implements IReceiptDetail {
     qty: number;
 
     @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails)
+    @JoinColumn({ name: 'id_receipt' })
     receipt: EReceipt;
 
 }
