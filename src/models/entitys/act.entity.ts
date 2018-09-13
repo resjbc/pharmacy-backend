@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany } from "typeorm";
 import { IsNotEmpty } from "class-validator";
 import { IAct } from "../../interfaces/app.interface";
-import { EReceipt } from "./receipt.entity";
+import { ETypeFees } from "./fees-type.entity";
 
 @Entity('Act')
 export class EAct implements IAct{
@@ -13,7 +13,11 @@ export class EAct implements IAct{
     @IsNotEmpty()
      description: string;
 
-     @OneToOne(type => EReceipt, receipt => receipt.act) // specify inverse side as a second parameter
-     receipt: EReceipt;
+     @OneToMany(type => ETypeFees, typefees => typefees.act, { nullable: false })
+     typefees_s: ETypeFees[];
+ 
+
+    /* @OneToOne(type => EReceipt, receipt => receipt.act) // specify inverse side as a second parameter
+     receipt: EReceipt;*/
     
 }

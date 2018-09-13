@@ -31,11 +31,11 @@ export class EPerson implements IPerson {
     @Column()
     mobile?: string;
 
-    @Column()
+    @Column({ nullable: true })
     @IsNotEmpty()
     username: string;
 
-    @Column()
+    @Column({ nullable: true })
     @IsNotEmpty()
     password: string;
 
@@ -43,6 +43,6 @@ export class EPerson implements IPerson {
     @IsNotEmpty()
     role: RoleAccount;
 
-    @OneToMany(type => EReceipt, receipt => receipt.id_person , { nullable: false })
+    @OneToMany(type => EReceipt, receipt => receipt.person , { nullable: false })
     receipts: EReceipt[];
 }

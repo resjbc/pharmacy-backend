@@ -12,11 +12,11 @@ export class EReceipt implements IReceipt {
     @PrimaryGeneratedColumn()
     id_receipt?;
 
-    @Column()
+    @Column({ name: 'id_person'})
     @IsNotEmpty()
-    id_person: number;
+    id_person : number;
 
-    @Column()
+    @Column('id_member_create')
     @IsNotEmpty()
     id_member_create: number;
 
@@ -28,21 +28,25 @@ export class EReceipt implements IReceipt {
     @IsNotEmpty()
     date_updated: Date;
 
-    @Column()
+    /*@Column()
     @IsNotEmpty()
-    id_act: number;
+    id_act: number;*/
 
     @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt, { nullable: false })
     receiptDetails: EReceiptDetail[];
 
-   @ManyToOne(type => EPerson, person => person.receipts, { nullable: false })
+    @ManyToOne(type => EPerson, person => person.receipts, { nullable: false })
     @JoinColumn({ name: 'id_person' })
     person: EPerson;
 
+    @ManyToOne(type => EPerson, person => person.receipts, { nullable: false })
+    @JoinColumn({ name: 'id_member_create' })
+    member_create: EPerson;
 
-    @OneToOne(type => EAct, act => act.receipt, { nullable: false })
+
+    /*@OneToOne(type => EAct, act => act.receipt, { nullable: false })
     @JoinColumn({ name: 'id_act' })
-    act: EAct
+    act: EAct*/
 
 }
 
@@ -52,6 +56,10 @@ export class EReceiptDetail implements IReceiptDetail {
 
     @PrimaryGeneratedColumn()
     id_receipt_detail?;
+
+    @Column('id_receipt')
+    @IsNotEmpty()
+    id_receipt : number;
 
 
     @Column()

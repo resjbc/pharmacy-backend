@@ -1,9 +1,8 @@
 //ใบเสร็จ
 export interface IReceipt {
     id_receipt?:any;
-    id_person: any;
-    id_act: any;
-    id_member_create: any;
+    id_person?: any;
+    id_member_create?: any;
     date_created: Date;
     date_updated: Date;
 }
@@ -12,6 +11,7 @@ export interface IReceipt {
 export interface IReceiptDetail {
     id_list: any;
     list: string;
+    id_receipt?:any
     id_receipt_detail?: any;
     qty: number;
     price: number;
@@ -26,6 +26,7 @@ export interface IAct {
 //ประเภทของค่าธรรมเนียม
 export interface ITypeFees {
     id_type?: any;
+    id_act?:any;
     description: string;
 }
 
