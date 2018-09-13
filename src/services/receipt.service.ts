@@ -17,13 +17,13 @@ export class ReceiptService {
    
     const receipt_item = await this.receiptRepository
     .createQueryBuilder('receipt')
-      //select()
+      //.select()
       //.innerJoin(EAct,"act","act.id_act = receipt.id_act")
       //.innerJoin(EReceiptDetail,"receipt_details","receipt_details.id_receipt = receipt.id_receipt")
       .innerJoinAndSelect("receipt.receiptDetails", "receiptDetail")
       .innerJoinAndSelect("receipt.act","act")
-      .where("receipt.id_customer = :id", { id: id_receipt})
-      .getOne()
+      .where("receipt.id_receipt = :id", { id: id_receipt}).orderBy("receipt.date_created","ASC")
+      .getMany()
       
      // console.log(receipt_item);
 

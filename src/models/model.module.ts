@@ -9,6 +9,7 @@ import { EAct } from './entitys/act.entity';
 import { ETypeFees, EGroupFees, EListFees } from './entitys/fees-type.entity';
 import { ReceiptService } from '../services/receipt.service';
 import { ReceiptController } from '../controllers/receipt.controller';
+import { EPerson } from './entitys/person.entity';
 
 
 
@@ -21,6 +22,7 @@ import { ReceiptController } from '../controllers/receipt.controller';
     TypeOrmModule.forFeature([ETypeFees]),
     TypeOrmModule.forFeature([EGroupFees]),
     TypeOrmModule.forFeature([EListFees]),
+    TypeOrmModule.forFeature([EPerson]),
   ],
   providers: [
     // PhotoService,
