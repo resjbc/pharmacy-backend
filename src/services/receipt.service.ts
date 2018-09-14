@@ -20,9 +20,9 @@ export class ReceiptService {
 
     const receipt_item = await this.personRepository
       .createQueryBuilder('person')
-      .leftJoinAndSelect("person.receipts", "receipt" )
-      .leftJoinAndSelect("receipt.member_create", "member_create" )
-      .leftJoinAndSelect("receipt.receiptDetails", "receiptDetail" )
+      .innerJoinAndSelect("person.receipts", "receipt" )
+      .innerJoinAndSelect("receipt.member_create", "member_create" )
+      .innerJoinAndSelect("receipt.receiptDetails", "receiptDetail" )
       .where("person.id_person = :id", { id: id_receipt })
       .getOne()
 

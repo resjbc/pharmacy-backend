@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
 import { IsNotEmpty } from "class-validator";
-import { ITypeFees, IGroupFees, IListFees } from "../../interfaces/app.interface";
+import { ITypeFees, IListFees } from "../../interfaces/app.interface";
 import { EAct } from "./act.entity";
 
 @Entity('TypeFees')
@@ -25,24 +25,6 @@ export class ETypeFees implements ITypeFees{
 }
 
 
-@Entity('GroupFees')
-export class EGroupFees implements IGroupFees {
-
-
-    @PrimaryGeneratedColumn()
-    id_group?: number;
-
-    @PrimaryColumn()
-    @IsNotEmpty()
-    id_type?: number;
-
-
-    @Column('text')
-    @IsNotEmpty()
-    description: string;
-
-}
-
 @Entity('ListFees')
 export class EListFees implements IListFees{
    
@@ -53,10 +35,6 @@ export class EListFees implements IListFees{
     @Column()
     @IsNotEmpty()
     id_type: number;
-
-    @Column()
-    @IsNotEmpty()
-    id_group: number;
 
 
     @Column('text')

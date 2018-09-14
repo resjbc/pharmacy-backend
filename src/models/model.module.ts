@@ -6,7 +6,7 @@ import { PhotoService } from '../services/photo.service';
 import { PhotoController } from '../controllers/photo.controller';
 import { EReceipt, EReceiptDetail } from './entitys/receipt.entity';
 import { EAct } from './entitys/act.entity';
-import { ETypeFees, EGroupFees, EListFees } from './entitys/fees-type.entity';
+import { ETypeFees, EListFees } from './entitys/fees-type.entity';
 import { ReceiptService } from '../services/receipt.service';
 import { ReceiptController } from '../controllers/receipt.controller';
 import { EPerson } from './entitys/person.entity';
@@ -20,7 +20,6 @@ import { EPerson } from './entitys/person.entity';
     TypeOrmModule.forFeature([EReceiptDetail]),
     TypeOrmModule.forFeature([EAct]),
     TypeOrmModule.forFeature([ETypeFees]),
-    TypeOrmModule.forFeature([EGroupFees]),
     TypeOrmModule.forFeature([EListFees]),
     TypeOrmModule.forFeature([EPerson]),
   ],

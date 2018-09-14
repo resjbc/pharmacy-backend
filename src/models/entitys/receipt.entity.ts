@@ -1,7 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { IsNotEmpty } from "class-validator";
 import { IReceipt, IReceiptDetail } from '../../interfaces/app.interface';
-import { EAct } from './act.entity';
 import { EPerson } from './person.entity';
 
 
@@ -19,6 +18,9 @@ export class EReceipt implements IReceipt {
     @Column('id_member_create')
     @IsNotEmpty()
     id_member_create: number;
+
+    @Column()
+    place: string;
 
     @Column()
     @IsNotEmpty()
@@ -70,6 +72,10 @@ export class EReceiptDetail implements IReceiptDetail {
     @Column('text')
     @IsNotEmpty()
     list: string;
+
+    @Column('text')
+    @IsNotEmpty()
+    type: string;
 
 
     @Column()

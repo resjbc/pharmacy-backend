@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyT
 import { IPerson, RoleAccount } from '../../interfaces/app.interface';
 import { IsNotEmpty } from 'class-validator';
 import { EReceipt } from './receipt.entity';
+import { EPlace } from './place.entity';
 
 
 
@@ -45,4 +46,7 @@ export class EPerson implements IPerson {
 
     @OneToMany(type => EReceipt, receipt => receipt.person , { nullable: false })
     receipts: EReceipt[];
+
+    @OneToMany(type => EPlace, place => place.person , { nullable: false })
+    places: EPlace[];
 }

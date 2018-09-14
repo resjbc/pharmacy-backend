@@ -3,6 +3,7 @@ export interface IReceipt {
     id_receipt?:any;
     id_person?: any;
     id_member_create?: any;
+    place: string;
     date_created: Date;
     date_updated: Date;
 }
@@ -30,17 +31,10 @@ export interface ITypeFees {
     description: string;
 }
 
-//หมวดค่าธรรมเนียม
-export interface IGroupFees {
-    id_group?: any;
-    id_type?: any;
-    description: string;
-}
 
 //รายการค่าธรรมเนียม
 export interface IListFees {
     id_list?: any;
-    id_group: any;
     id_type: any;
     description: string;
     price:string;
@@ -79,4 +73,11 @@ export enum RoleAccount {
     Member = 1,
     Employee,
     Admin
+}
+
+// 
+export interface IPlace {
+    id_place?: any;
+    id_person? :any;
+    description: string;
 }
