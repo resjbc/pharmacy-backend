@@ -12,6 +12,7 @@ export class ReceiptController {
 
     @Get(':id')
     findAll(@Param(new ValidationPipe()) param: ParamReceipt) {
+        //console.log(param.id);
         return this.receiptService.findAll(param.id);
     }
 

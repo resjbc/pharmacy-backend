@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { IPerson, RoleAccount } from '../../interfaces/app.interface';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumberString } from 'class-validator';
 import { EReceipt } from './receipt.entity';
 import { EPlace } from './place.entity';
 
@@ -49,4 +49,10 @@ export class EPerson implements IPerson {
 
     @OneToMany(type => EPlace, place => place.person , { nullable: false })
     places: EPlace[];
+}
+
+export class ParamPerson {
+    @IsNotEmpty()
+    @IsNumberString()
+    pid: any;
 }

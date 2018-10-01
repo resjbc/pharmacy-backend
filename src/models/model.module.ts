@@ -10,6 +10,10 @@ import { ETypeFees, EListFees } from './entitys/fees-type.entity';
 import { ReceiptService } from '../services/receipt.service';
 import { ReceiptController } from '../controllers/receipt.controller';
 import { EPerson } from './entitys/person.entity';
+import { ActTypeListService } from '../services/act_type_list.service';
+import { ActTypeListController } from '../controllers/act_type_list.controller';
+import { PersonController } from '../controllers/person.controller';
+import { PersonService } from '../services/person.service';
 
 
 
@@ -25,11 +29,15 @@ import { EPerson } from './entitys/person.entity';
   ],
   providers: [
     // PhotoService,
-    ReceiptService
+    ReceiptService,
+    ActTypeListService,
+    PersonService
   ],
   controllers: [
    // PhotoController,
-    ReceiptController
+    ReceiptController,
+    ActTypeListController,
+    PersonController
   ],
 })
-export class PhotoModule { }
+export class ModelsModule { }

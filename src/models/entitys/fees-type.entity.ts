@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsNumber, IsInt, IsNumberString } from "class-validator";
 import { ITypeFees, IListFees } from "../../interfaces/app.interface";
 import { EAct } from "./act.entity";
 
@@ -46,3 +46,16 @@ export class EListFees implements IListFees{
     price: string;
 
 }
+
+export class ParamTypeInAct {
+    @IsNotEmpty()
+    @IsNumberString()
+    id_act: any;
+}
+
+export class ParamListInType {
+    @IsNotEmpty()
+    @IsNumberString()
+    id_type: any;
+}
+

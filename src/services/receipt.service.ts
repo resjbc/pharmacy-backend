@@ -16,13 +16,13 @@ export class ReceiptService {
   ) { }
 
   async findAll(id_receipt: any) {
-    //console.log(id_receipt);
+    console.log(id_receipt);
 
     const receipt_item = await this.personRepository
       .createQueryBuilder('person')
-      .innerJoinAndSelect("person.receipts", "receipt" )
-      .innerJoinAndSelect("receipt.member_create", "member_create" )
-      .innerJoinAndSelect("receipt.receiptDetails", "receiptDetail" )
+      .leftJoinAndSelect("person.receipts", "receipt" )
+      .leftJoinAndSelect("receipt.member_create", "member_create" )
+      .leftJoinAndSelect("receipt.receiptDetails", "receiptDetail" )
       .where("person.id_person = :id", { id: id_receipt })
       .getOne()
 
@@ -46,6 +46,8 @@ export class ReceiptService {
   async insertReceipt(receipt: EReceipt) {
     return await this.receiptRepository.insert(receipt);
   }
+
+  
 
 
 

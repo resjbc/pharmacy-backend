@@ -19,8 +19,11 @@ export class EReceipt implements IReceipt {
     @IsNotEmpty()
     id_member_create: number;
 
-    @Column()
+    @Column({ nullable: true })
     place: string;
+
+    @Column({ nullable: true })
+    place_address: string;
 
     @Column()
     @IsNotEmpty()
@@ -78,8 +81,8 @@ export class EReceiptDetail implements IReceiptDetail {
     type: string;
 
 
-    @Column()
-    @IsNotEmpty()
+    @Column({ nullable: true })
+    //@IsNotEmpty()
     qty: number;
 
     @Column()
