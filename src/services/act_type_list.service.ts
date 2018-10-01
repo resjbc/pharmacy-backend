@@ -32,7 +32,7 @@ export class ActTypeListService {
       .where("typefees.id_act = :id_act", { id_act: id_act })
       .getMany()
 
-    if (type_in_act_item.length == 0) throw new BadRequestException('ไม่มีประเภทค่าธรรมเนียมในพรบนี้');
+    if (type_in_act_item.length == 0) throw new BadRequestException('ไม่มีประเภทค่าธรรมเนียมใน พรบ นี้');
     return type_in_act_item;
   }
 
@@ -43,7 +43,7 @@ export class ActTypeListService {
       .where("list.id_type = :id_type", { id_type: id_type })
       .getMany()
 
-    if (list_in_type_item.length == 0) throw new BadRequestException('ไม่มีไอดีนี้ในระบบ');
+    if (list_in_type_item.length == 0) throw new BadRequestException('ไม่มีรายการในประเภทค่าธรรมเนียมนี้');
     return list_in_type_item;
   }
 
