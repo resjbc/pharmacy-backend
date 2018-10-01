@@ -1,0 +1,4 @@
+INSERT INTO "Receipt"("id_receipt", "id_person", "id_member_create", "place", "date_created", "date_updated", "place_address") VALUES (2, 1, 2, 'test', '2018-09-30 13:28:54', '2018-09-30 13:28:56', NULL);
+INSERT INTO "Receipt"("id_receipt", "id_person", "id_member_create", "place", "date_created", "date_updated", "place_address") VALUES (3, 1, 1, 'test2', '2018-09-30 13:28:54', '2018-09-30 13:28:56', NULL);
+INSERT INTO "Receipt"("id_receipt", "id_person", "id_member_create", "place", "date_created", "date_updated", "place_address") VALUES (4, 2, 2, 'test3', '2018-09-30 13:28:54', '2018-09-30 13:28:56', NULL);
+INSERT INTO "Receipt"("id_receipt", "id_person", "id_member_create", "place", "date_created", "date_updated", "place_address") VALUES (5, 2, 2, 'test3', '2018-09-30 13:28:54', '2018-09-30 13:28:56', NULL);

@@ -1,0 +1,1 @@
+INSERT INTO "ReceiptDetail"("id_receipt_detail", "id_receipt", "id_list", "list", "type", "qty", "price") VALUES (1, 2, 1, 'ค่าพิจารณาคำขอรับเลขสถานที่ผลิตอาหารที่ไม่เข้าข่ายโรงงาน (แบบ สบ.1) [ตามบัญชีข้อ 1.1(1)]', 'ม.44', NULL, 1000);
