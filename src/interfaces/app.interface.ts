@@ -4,6 +4,7 @@ export interface IReceipt {
     id_person?: any;
     id_member_create?: any;
     place: string;
+    place_address: string;
     date_created: Date;
     date_updated: Date;
 }
@@ -14,6 +15,7 @@ export interface IReceiptDetail {
     list: string;
     id_receipt?:any
     id_receipt_detail?: any;
+    type: string,
     qty: number;
     price: number;
 }

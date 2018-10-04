@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, BadRequestException, Param } from '@nestjs/common';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { ReceiptService } from 'services/receipt.service';
-import { IReceipt } from '../interfaces/app.interface';
-import { ParamReceipt, EReceipt } from '../models/entitys/receipt.entity';
+import { ParamReceipt, ParamInsertReceipt } from '../models/entitys/receipt.entity';
 
 
 
@@ -17,7 +16,7 @@ export class ReceiptController {
     }
 
     @Post('add')
-    insertPhoto(@Body(new ValidationPipe()) body: EReceipt) {
+    insertReceipt(@Body(new ValidationPipe()) body: ParamInsertReceipt) {
         return this.receiptService.insertReceipt(body);
     }
 }

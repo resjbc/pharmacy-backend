@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, createQueryBuilder } from 'typeorm';
-import { EReceipt } from 'models/entitys/receipt.entity';
+import { EReceipt, EReceiptDetail } from '../models/entitys/receipt.entity';
 import { EPerson } from '../models/entitys/person.entity';
 
 
@@ -11,6 +11,8 @@ export class ReceiptService {
   constructor(
     @InjectRepository(EReceipt)
     private readonly receiptRepository: Repository<EReceipt>,
+    @InjectRepository(EReceiptDetail)
+    private readonly receipt_detailRepository: Repository<EReceiptDetail>,
     @InjectRepository(EPerson)
     private readonly personRepository: Repository<EPerson>,
   ) { }
@@ -43,8 +45,17 @@ export class ReceiptService {
     return receipt_item;
   }
 
-  async insertReceipt(receipt: EReceipt) {
-    return await this.receiptRepository.insert(receipt);
+  async insertReceipt(receipt: any) {
+     const rusults = await this.receiptRepository.insert(receipt);
+     const identifiers = rusults.identifiers[0];
+     const id_receipt = Object.keys(identifiers).map(key => identifiers[key])[0];
+     
+     const receiptDetails = receipt.receiptDetails.map((receiptDetail) => {
+      receiptDetail.id_receipt = id_receipt;
+      return receiptDetail;
+    })
+
+    return await this.receipt_detailRepository.insert(receiptDetails);
   }
 
   

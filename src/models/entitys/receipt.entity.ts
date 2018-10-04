@@ -11,9 +11,9 @@ export class EReceipt implements IReceipt {
     @PrimaryGeneratedColumn()
     id_receipt?;
 
-    @Column({ name: 'id_person'})
+    @Column({ name: 'id_person' })
     @IsNotEmpty()
-    id_person : number;
+    id_person: number;
 
     @Column('id_member_create')
     @IsNotEmpty()
@@ -37,7 +37,7 @@ export class EReceipt implements IReceipt {
     @IsNotEmpty()
     id_act: number;*/
 
-    @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt, { nullable: false })
+    @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt)
     receiptDetails: EReceiptDetail[];
 
     @ManyToOne(type => EPerson, person => person.receipts, { nullable: false })
@@ -64,7 +64,7 @@ export class EReceiptDetail implements IReceiptDetail {
 
     @Column('id_receipt')
     @IsNotEmpty()
-    id_receipt : number;
+    id_receipt: number;
 
 
     @Column()
@@ -90,7 +90,11 @@ export class EReceiptDetail implements IReceiptDetail {
     price: number;
 
 
-    @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails, { nullable: false })
+    @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails,
+        {
+            onUpdate: "CASCADE",
+            onDelete: "CASCADE"
+        })
     @JoinColumn({ name: 'id_receipt' })
     receipt: EReceipt;
 
@@ -99,4 +103,35 @@ export class EReceiptDetail implements IReceiptDetail {
 export class ParamReceipt {
     @IsNotEmpty()
     id: number
+}
+
+export class ParamReceiptDetail {
+    @IsNotEmpty()
+    id_list: string;
+    @IsNotEmpty()
+    list: string;
+    qty?: number;
+    @IsNotEmpty()
+    price: number;
+    @IsNotEmpty()
+    type: string;
+}
+
+export class ParamInsertReceipt  {
+
+    @IsNotEmpty()
+    id_person: any;
+    @IsNotEmpty()
+    id_member_create: any;
+
+    place: string;
+    place_address: string;
+
+    @IsNotEmpty()
+    date_created:  Date;
+    @IsNotEmpty()
+    date_updated: Date;
+
+    @IsNotEmpty()
+    receiptDetails: ParamReceiptDetail[];
 }
