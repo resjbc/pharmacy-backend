@@ -22,9 +22,9 @@ export class ReceiptService {
 
     const receipt_item = await this.personRepository
       .createQueryBuilder('person')
-      .leftJoinAndSelect("person.receipts", "receipt" )
-      .leftJoinAndSelect("receipt.member_create", "member_create" )
-      .leftJoinAndSelect("receipt.receiptDetails", "receiptDetail" )
+      .leftJoinAndSelect("person.receipts", "receipt")
+      .leftJoinAndSelect("receipt.member_create", "member_create")
+      .leftJoinAndSelect("receipt.receiptDetails", "receiptDetail")
       .where("person.id_person = :id", { id: id_receipt })
       .getOne()
 
@@ -45,20 +45,35 @@ export class ReceiptService {
     return receipt_item;
   }
 
-  async insertReceipt(receipt: any) {
-     const rusults = await this.receiptRepository.insert(receipt);
-     const identifiers = rusults.identifiers[0];
-     const id_receipt = Object.keys(identifiers).map(key => identifiers[key])[0];
-     
-     const receiptDetails = receipt.receiptDetails.map((receiptDetail) => {
-      receiptDetail.id_receipt = id_receipt;
+  async insertReceipt(receipts: any) {
+
+
+    let receipt = receipts;
+    let receiptDetailss = receipts["receiptDetails"];
+    delete receipt.receiptDetails;
+    let year = new Date().getFullYear();
+
+   receipt = await this.receiptRepository.save(receipt).catch(err => {throw new BadRequestException('receiptRepository1')});
+    receipt.id_reference = year +""+ receipt.id_receipt;
+    receipt  = await this.receiptRepository.save(receipt).catch(err => {throw new BadRequestException('receiptRepository2')});
+
+    const receiptDetails = receiptDetailss.map((receiptDetail) => {
+      receiptDetail.id_receipt = receipt.id_receipt;
       return receiptDetail;
     })
 
-    return await this.receipt_detailRepository.insert(receiptDetails);
+    const receipt_details = await this.receipt_detailRepository.save(receiptDetails).catch(err => {throw new BadRequestException('receipt_detailRepository')});
+    receipt.receiptDetails = receipt_details;
+
+    return receipt;
+
+    //console.log(rusults);
+    //const identifiers = rusults.identifiers[0];
+
+    /*const id_receipt = Object.keys(identifiers).map(key => identifiers[key])[0];*/
   }
 
-  
+
 
 
 

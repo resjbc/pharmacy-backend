@@ -12,7 +12,7 @@ export interface IReceipt {
 //รายการในใบเสร็จ
 export interface IReceiptDetail {
     id_list: any;
-    list: string;
+    description: string;
     id_receipt?:any
     id_receipt_detail?: any;
     type: string,

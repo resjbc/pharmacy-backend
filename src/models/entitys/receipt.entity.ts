@@ -33,6 +33,14 @@ export class EReceipt implements IReceipt {
     @IsNotEmpty()
     date_updated: Date;
 
+    @Column({ nullable: true })
+    id_reference?: string;
+
+    @Column({ nullable: true })
+    id_receipt_cash?: string;
+
+    @Column({ nullable: true })
+    id_receipt_cash_number?: string;
     /*@Column()
     @IsNotEmpty()
     id_act: number;*/
@@ -74,7 +82,7 @@ export class EReceiptDetail implements IReceiptDetail {
 
     @Column('text')
     @IsNotEmpty()
-    list: string;
+    description: string;
 
     @Column('text')
     @IsNotEmpty()
@@ -88,6 +96,8 @@ export class EReceiptDetail implements IReceiptDetail {
     @Column()
     @IsNotEmpty()
     price: number;
+
+   
 
 
     @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails,
@@ -107,9 +117,9 @@ export class ParamReceipt {
 
 export class ParamReceiptDetail {
     @IsNotEmpty()
-    id_list: string;
+    id_list: number;
     @IsNotEmpty()
-    list: string;
+    description: string;
     qty?: number;
     @IsNotEmpty()
     price: number;
@@ -118,6 +128,9 @@ export class ParamReceiptDetail {
 }
 
 export class ParamInsertReceipt  {
+
+   
+    id_receipt?: any;
 
     @IsNotEmpty()
     id_person: any;
