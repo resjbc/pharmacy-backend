@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsNumberString } from "class-validator";
 import { IReceipt, IReceiptDetail } from '../../interfaces/app.interface';
 import { EPerson } from './person.entity';
 
@@ -41,6 +41,9 @@ export class EReceipt implements IReceipt {
 
     @Column({ nullable: true })
     id_receipt_cash_number?: string;
+
+    @Column({ name: 'id_member_cash', nullable: true })
+    id_member_cash?: number;
     /*@Column()
     @IsNotEmpty()
     id_act: number;*/
@@ -55,6 +58,10 @@ export class EReceipt implements IReceipt {
     @ManyToOne(type => EPerson, person => person.receipts, { nullable: false })
     @JoinColumn({ name: 'id_member_create' })
     member_create: EPerson;
+
+    @ManyToOne(type => EPerson, person => person.receipts, { nullable: true })
+    @JoinColumn({ name: 'id_member_cash' })
+    member_cash: EPerson;
 
 
     /*@OneToOne(type => EAct, act => act.receipt, { nullable: false })
@@ -97,7 +104,7 @@ export class EReceiptDetail implements IReceiptDetail {
     @IsNotEmpty()
     price: number;
 
-   
+
 
 
     @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails,
@@ -112,7 +119,8 @@ export class EReceiptDetail implements IReceiptDetail {
 
 export class ParamReceipt {
     @IsNotEmpty()
-    id: number
+    @IsNumberString()
+    id_reference: any
 }
 
 export class ParamReceiptDetail {
@@ -127,9 +135,9 @@ export class ParamReceiptDetail {
     type: string;
 }
 
-export class ParamInsertReceipt  {
+export class ParamInsertReceipt {
 
-   
+
     id_receipt?: any;
 
     @IsNotEmpty()
@@ -141,10 +149,17 @@ export class ParamInsertReceipt  {
     place_address: string;
 
     @IsNotEmpty()
-    date_created:  Date;
+    date_created: Date;
     @IsNotEmpty()
     date_updated: Date;
 
     @IsNotEmpty()
     receiptDetails: ParamReceiptDetail[];
+}
+
+
+export class ParamDeleteReceiptDetail {
+    @IsNotEmpty()
+    @IsNumberString()
+    id_receipt_detail: any
 }

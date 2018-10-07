@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, BadRequestException, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, BadRequestException, Param, Delete } from '@nestjs/common';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { ReceiptService } from 'services/receipt.service';
-import { ParamReceipt, ParamInsertReceipt } from '../models/entitys/receipt.entity';
+import { ParamReceipt, ParamInsertReceipt, ParamReceiptDetail, ParamDeleteReceiptDetail } from '../models/entitys/receipt.entity';
+import { IReceiptDetail } from '../interfaces/app.interface';
 
 
 
@@ -9,14 +10,19 @@ import { ParamReceipt, ParamInsertReceipt } from '../models/entitys/receipt.enti
 export class ReceiptController {
     constructor(private readonly receiptService: ReceiptService) { }
 
-    @Get(':id')
-    findAll(@Param(new ValidationPipe()) param: ParamReceipt) {
+    @Get(':id_reference')
+    findReceipt(@Param(new ValidationPipe()) param: ParamReceipt) {
         //console.log(param.id);
-        return this.receiptService.findAll(param.id);
+        return this.receiptService.findReceipt(param.id_reference);
     }
 
     @Post('add')
     insertReceipt(@Body(new ValidationPipe()) body: ParamInsertReceipt) {
         return this.receiptService.insertReceipt(body);
+    }
+
+    @Delete('receiptDetail/:id_receipt_detail')
+    deleteReceiptDetail(@Param(new ValidationPipe()) param: ParamDeleteReceiptDetail) {
+       return this.receiptService.deleteReceiptDetail(param);
     }
 }
