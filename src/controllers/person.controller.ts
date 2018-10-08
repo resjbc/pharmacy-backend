@@ -15,6 +15,11 @@ export class PersonController {
        return this.personService.getPerson(param.pid);
     }
 
+    @Get()
+    getPersons() {
+       return this.personService.getPersons();
+    }
+
     @Post('add')
     addPerson(@Body(new ValidationPipe()) body: ParamAddPerson) {
       return this.personService.addPerson(body);

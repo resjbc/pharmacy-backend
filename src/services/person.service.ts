@@ -21,6 +21,13 @@ export class PersonService {
     return person;
   }
 
+  async getPersons() {
+    const persons = await this.personRepository.find();
+     
+    if (persons.length == 0) throw new BadRequestException('ไม่มีบุคคลในระบบ');
+    return persons;
+  }
+
   async addPerson(person) {
     const member = await this.personRepository.save(person).catch(err => { throw new BadRequestException("มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว") });
     return member;
