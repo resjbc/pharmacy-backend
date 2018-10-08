@@ -14,8 +14,6 @@ export class ReceiptService {
     private readonly receiptRepository: Repository<EReceipt>,
     @InjectRepository(EReceiptDetail)
     private readonly receipt_detailRepository: Repository<EReceiptDetail>,
-    @InjectRepository(EPerson)
-    private readonly personRepository: Repository<EPerson>,
   ) { }
 
   async findReceipt(id_reference: any) {

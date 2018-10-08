@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { EPerson } from "../models/entitys/person.entity";
+import { EPerson, ParamAddPerson } from "../models/entitys/person.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
@@ -8,7 +8,7 @@ export class PersonService {
   constructor(
     @InjectRepository(EPerson)
     private readonly personRepository: Repository<EPerson>,
-  ) {}
+  ) { }
 
   async getPerson(pid: number) {
     const person = await this.personRepository
@@ -20,5 +20,10 @@ export class PersonService {
     if (!person) throw new BadRequestException('ไม่มีบุคคลนี้ในระบบ');
     return person;
   }
-  
+
+  async addPerson(person) {
+    const member = await this.personRepository.save(person).catch(err => { throw new BadRequestException("มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว") });
+    return member;
+  }
+
 }

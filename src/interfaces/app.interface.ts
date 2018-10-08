@@ -42,6 +42,7 @@ export interface IListFees {
     price:string;
 }
 
+//บุคคล
 export interface IPerson {
     id_person?: any;
     cid:string;
@@ -54,6 +55,7 @@ export interface IPerson {
     role: RoleAccount
 }
 
+//บัญชีบุคคล
 export interface IAccount {
     firstname: string;
     lastname: string;
@@ -73,8 +75,9 @@ export interface IAccount {
 // สิทธ์ผู้ใช้งาน
 export enum RoleAccount {
     Member = 1,
-    Employee,
-    Admin
+    Cash,
+    Pharmacy,
+    Admin 
 }
 
 // 
@@ -83,3 +86,6 @@ export interface IPlace {
     id_person? :any;
     description: string;
 }
+
+
+

@@ -1,11 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, OneToMany, Unique } from 'typeorm';
 import { IPerson, RoleAccount } from '../../interfaces/app.interface';
-import { IsNotEmpty, IsNumberString } from 'class-validator';
+import { IsNotEmpty, IsNumberString, Matches } from 'class-validator';
 import { EReceipt } from './receipt.entity';
 import { EPlace } from './place.entity';
+import { IsRoleAccount } from '../../pipes/validation.pipe';
 
 
-
+@Unique(["cid"])
 @Entity('Person')
 export class EPerson implements IPerson {
     
@@ -25,23 +26,21 @@ export class EPerson implements IPerson {
     @IsNotEmpty()
     lastname: string;
 
-    @Column()
-    @IsNotEmpty()
+    @Column({ nullable: true })
     address: string;
 
-    @Column()
+    @Column({ nullable: true })
     mobile?: string;
 
     @Column({ nullable: true })
-    @IsNotEmpty()
     username: string;
 
     @Column({ nullable: true })
-    @IsNotEmpty()
     password: string;
 
     @Column()
     @IsNotEmpty()
+    @IsRoleAccount()
     role: RoleAccount;
 
     @OneToMany(type => EReceipt, receipt => receipt.person , { nullable: false })
@@ -55,4 +54,29 @@ export class ParamPerson {
     @IsNotEmpty()
     @IsNumberString()
     pid: any;
+}
+
+export class ParamAddPerson {
+
+        id_person?: number;
+
+        @IsNumberString()
+        @Matches(/^[0-9]{13,13}$/)
+        cid: number;
+
+        @IsNotEmpty()
+        firstname: string;
+
+        @IsNotEmpty()
+        lastname: string;
+
+        address?: string;
+        mobile?: string;
+        username?: string;
+        password?: string;
+        
+        @IsNotEmpty()
+        @IsRoleAccount()
+        role: RoleAccount
+    
 }
