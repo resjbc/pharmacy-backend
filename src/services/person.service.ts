@@ -33,4 +33,9 @@ export class PersonService {
     return member;
   }
 
+  async deletePerson(person){
+    return await this.personRepository.delete(person)
+          .catch(err => { throw new BadRequestException(err) });;
+  }
+
 }

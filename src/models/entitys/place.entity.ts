@@ -13,7 +13,7 @@ export class EPlace implements IPlace{
     id_place?: number;
 
 
-    @Column('id_person')
+    @Column({ name: 'id_person' , nullable: true})
     @IsNotEmpty()
     id_person: number;
 
@@ -21,7 +21,7 @@ export class EPlace implements IPlace{
     @IsNotEmpty()
     description: string;
 
-    @ManyToOne(type => EPerson, person => person.places, { nullable: false })
+    @ManyToOne(type => EPerson, person => person.places, { nullable: true })
     @JoinColumn({ name: 'id_person' })
     person: EPerson;
 

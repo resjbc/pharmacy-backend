@@ -9,7 +9,7 @@ import { IsRoleAccount } from '../../pipes/validation.pipe';
 @Unique(["cid"])
 @Entity('Person')
 export class EPerson implements IPerson {
-    
+
 
     @PrimaryGeneratedColumn()
     id_person?;
@@ -43,10 +43,10 @@ export class EPerson implements IPerson {
     @IsRoleAccount()
     role: RoleAccount;
 
-    @OneToMany(type => EReceipt, receipt => receipt.person , { nullable: false })
+    @OneToMany(type => EReceipt, receipt => receipt.person, { nullable: true })
     receipts: EReceipt[];
 
-    @OneToMany(type => EPlace, place => place.person , { nullable: false })
+    @OneToMany(type => EPlace, place => place.person, { nullable: true })
     places: EPlace[];
 }
 
@@ -58,25 +58,31 @@ export class ParamPerson {
 
 export class ParamAddPerson {
 
-        id_person?: number;
+    id_person?: number;
 
-        @IsNumberString()
-        @Matches(/^[0-9]{13,13}$/)
-        cid: number;
+    @IsNumberString()
+    @Matches(/^[0-9]{13,13}$/)
+    cid: number;
 
-        @IsNotEmpty()
-        firstname: string;
+    @IsNotEmpty()
+    firstname: string;
 
-        @IsNotEmpty()
-        lastname: string;
+    @IsNotEmpty()
+    lastname: string;
 
-        address?: string;
-        mobile?: string;
-        username?: string;
-        password?: string;
-        
-        @IsNotEmpty()
-        @IsRoleAccount()
-        role: RoleAccount
-    
+    address?: string;
+    mobile?: string;
+    username?: string;
+    password?: string;
+
+    @IsNotEmpty()
+    @IsRoleAccount()
+    role: RoleAccount
+
+}
+
+export class ParamDeletePerson {
+    @IsNotEmpty()
+    @IsNumberString()
+    id_person?: any;
 }

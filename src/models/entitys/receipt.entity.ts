@@ -11,11 +11,11 @@ export class EReceipt implements IReceipt {
     @PrimaryGeneratedColumn()
     id_receipt?;
 
-    @Column({ name: 'id_person' })
+    @Column({ name: 'id_person' , nullable: true })
     @IsNotEmpty()
     id_person: number;
 
-    @Column('id_member_create')
+    @Column({ name: 'id_member_create' , nullable: true })
     @IsNotEmpty()
     id_member_create: number;
 
@@ -51,15 +51,24 @@ export class EReceipt implements IReceipt {
     @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt)
     receiptDetails: EReceiptDetail[];
 
-    @ManyToOne(type => EPerson, person => person.receipts, { nullable: false })
+    @ManyToOne(type => EPerson, person => person.receipts, { 
+        nullable: true ,
+        onDelete: "SET NULL"
+    })
     @JoinColumn({ name: 'id_person' })
     person: EPerson;
 
-    @ManyToOne(type => EPerson, person => person.receipts, { nullable: false })
+    @ManyToOne(type => EPerson, person => person.receipts, { 
+        nullable: true ,
+        onDelete: "SET NULL"
+    })
     @JoinColumn({ name: 'id_member_create' })
     member_create: EPerson;
 
-    @ManyToOne(type => EPerson, person => person.receipts, { nullable: true })
+    @ManyToOne(type => EPerson, person => person.receipts, {
+         nullable: true ,
+         onDelete: "SET NULL"
+        })
     @JoinColumn({ name: 'id_member_cash' })
     member_cash: EPerson;
 
@@ -103,8 +112,6 @@ export class EReceiptDetail implements IReceiptDetail {
     @Column()
     @IsNotEmpty()
     price: number;
-
-
 
 
     @ManyToOne(type => EReceipt, receipt => receipt.receiptDetails,
