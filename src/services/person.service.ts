@@ -22,9 +22,10 @@ export class PersonService {
   }
 
   async getPersons() {
-    const persons = await this.personRepository.find();
+    const persons = await this.personRepository.createQueryBuilder('person')
+    .select().orderBy("person.id_person","DESC").getMany();
      
-    if (persons.length == 0) throw new BadRequestException('ไม่มีบุคคลในระบบ');
+    if (!persons) throw new BadRequestException('ไม่มีบุคคลในระบบ');
     return persons;
   }
 

@@ -48,7 +48,7 @@ export class ReceiptService {
       .where("receipt.id_reference = :id", { id: id_reference })
       .getOne()
 
-      console.log(receipt_item);
+      //console.log(receipt_item);
 
     /*const receipt_item = await this.receiptRepository
       .createQueryBuilder('receipt')

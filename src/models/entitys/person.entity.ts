@@ -58,11 +58,10 @@ export class ParamPerson {
 
 export class ParamAddPerson {
 
-    id_person?: number;
+    id_person?: any;
 
-    @IsNumberString()
     @Matches(/^[0-9]{13,13}$/)
-    cid: number;
+    cid: any;
 
     @IsNotEmpty()
     firstname: string;
