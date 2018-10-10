@@ -10,7 +10,7 @@ export class ETypeFees implements ITypeFees{
     id_type?: number;
 
 
-    @Column()
+    @Column( {name: 'id_act', nullable: true })
     @IsNotEmpty()
     id_act?:number ;
 
@@ -18,7 +18,10 @@ export class ETypeFees implements ITypeFees{
     @IsNotEmpty()
     description: string;
 
-    @ManyToOne(type => EAct, act => act.typefees_s, { nullable: false })
+    @ManyToOne(type => EAct, act => act.typefees_s, {
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL"
+    })
     @JoinColumn({ name: 'id_act' })
     act: EAct;
 

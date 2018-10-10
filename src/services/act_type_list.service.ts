@@ -15,14 +15,24 @@ export class ActTypeListService {
     private readonly listFeesRepository: Repository<EListFees>,
   ) {}
 
-  async Act() {
+  async getActs() {
     const act_item = await this.actRepository
       .createQueryBuilder('act')
-      .select()
+      .select().orderBy("id_act","DESC")
       .getMany()
 
     if (!act_item) throw new BadRequestException('ไม่มีรายการพรบในระบบ');
     return act_item;
+  }
+
+  async addAct(act) {
+    const act_ = await this.actRepository.save(act).catch(err => { throw new BadRequestException(err) }); //"มี พรบ ในระบบแล้ว"
+    return act_;
+  }
+
+  async deleteAct(act) {
+    return await this.actRepository.delete(act)
+    .catch(err => { throw new BadRequestException(err) });;  //วัตถุออกฤทธิ์ต่อจิตและประสาท
   }
 
   async TypeInAct(id_act: number) {

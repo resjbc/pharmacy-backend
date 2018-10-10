@@ -1,7 +1,8 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, Param, Delete, Post, Body } from "@nestjs/common";
 import { ActTypeListService } from "services/act_type_list.service";
 import { ParamTypeInAct, ParamListInType } from "../models/entitys/fees-type.entity";
 import { ValidationPipe } from "../pipes/validation.pipe";
+import { ParamAct, ParamDeleteAct } from "../models/entitys/act.entity";
 
 @Controller('act_type_list')
 export class ActTypeListController {
@@ -9,7 +10,17 @@ export class ActTypeListController {
 
     @Get("act")
     ActAll() {
-        return this.act_type_listService.Act();
+        return this.act_type_listService.getActs();
+    }
+
+    @Delete('act/:id_act')
+    deleteReceiptDetail(@Param(new ValidationPipe()) param: ParamDeleteAct) {
+      return this.act_type_listService.deleteAct(param);
+    }
+
+    @Post('act')
+    addAct(@Body(new ValidationPipe()) body: ParamAct) {
+      return this.act_type_listService.addAct(body);
     }
 
     @Get("type_in_act/:id_act")
