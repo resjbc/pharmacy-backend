@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, ManyToOne, JoinColumn, Unique } from "typeorm";
 import { IsNotEmpty, IsNumber, IsInt, IsNumberString } from "class-validator";
 import { ITypeFees, IListFees } from "../../interfaces/app.interface";
 import { EAct } from "./act.entity";
 
+@Unique(["id_act","description"])
 @Entity('TypeFees')
 export class ETypeFees implements ITypeFees{
 
@@ -27,7 +28,7 @@ export class ETypeFees implements ITypeFees{
 
 }
 
-
+@Unique(["id_type","description","price"])
 @Entity('ListFees')
 export class EListFees implements IListFees{
    
@@ -62,11 +63,33 @@ export class ParamListInType {
     id_type: any;
 }
 
+export class ParamDeleteList {
+    @IsNotEmpty()
+    id_list?: number;
+}
+
+export class ParamList {
+    id_list?: number;
+    @IsNotEmpty()
+    id_type: number;
+    @IsNotEmpty()
+    description: string;
+    @IsNotEmpty()
+    price: string;
+}
+
 export class ParamType {
     id_type?: any;
     @IsNotEmpty()
     description?: string;
+    @IsNotEmpty()
+    id_act: number;
+}
 
-    id_act?: any;
+export class ParamDeleteType {
+    @IsNotEmpty()
+    id_type?: any;
+    description: string;
+    id_act?: number;
 }
 

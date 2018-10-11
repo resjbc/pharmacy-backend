@@ -34,7 +34,7 @@ export class ParamDeleteAct {
 
 export class ParamAct {
 
-    id_act?: any;
+    id_act: any;
     @IsNotEmpty()
     description?: string;
 }

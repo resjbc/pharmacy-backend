@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Delete, Post, Body } from "@nestjs/common";
 import { ActTypeListService } from "services/act_type_list.service";
-import { ParamTypeInAct, ParamListInType, ParamType } from "../models/entitys/fees-type.entity";
+import { ParamTypeInAct, ParamListInType, ParamType, ParamDeleteType, ParamDeleteList, ParamList } from "../models/entitys/fees-type.entity";
 import { ValidationPipe } from "../pipes/validation.pipe";
 import { ParamAct, ParamDeleteAct } from "../models/entitys/act.entity";
 
@@ -29,7 +29,7 @@ export class ActTypeListController {
     }
 
     @Delete('type_in_act/:id_type')
-    deleteTypeInAct(@Param(new ValidationPipe()) param: ParamType) {
+    deleteTypeInAct(@Param(new ValidationPipe()) param: ParamDeleteType) {
       return this.act_type_listService.deleteType(param);
     }
 
@@ -41,5 +41,15 @@ export class ActTypeListController {
     @Get("list_in_type/:id_type")
     ListInType(@Param(new ValidationPipe()) param: ParamListInType) {
         return this.act_type_listService.ListInType(param.id_type);
+    }
+
+    @Delete('list_in_type/:id_list')
+    deleteList(@Param(new ValidationPipe()) param: ParamDeleteList) {
+      return this.act_type_listService.deleteList(param);
+    }
+
+    @Post('list_in_type/list')
+    addList(@Body(new ValidationPipe()) body: ParamList) {
+      return this.act_type_listService.addList(body);
     }
 }

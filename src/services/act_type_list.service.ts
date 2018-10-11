@@ -26,7 +26,7 @@ export class ActTypeListService {
   }
 
   async addAct(act) {
-    const act_ = await this.actRepository.save(act).catch(err => { throw new BadRequestException(err) }); //"มี พรบ ในระบบแล้ว"
+    const act_ = await this.actRepository.save(act).catch(err => { throw new BadRequestException("มี พรบ ในระบบแล้ว") }); //
     return act_;
   }
 
@@ -52,7 +52,7 @@ export class ActTypeListService {
   }
 
   async addType(type) {
-    const type_ = await this.typeFeesRepository.save(type).catch(err => { throw new BadRequestException(err) }); //"มี พรบ ในระบบแล้ว"
+    const type_ = await this.typeFeesRepository.save(type).catch(err => { throw new BadRequestException("มี พรบ นี้ในระบบแล้ว") }); //
     return type_;
   }
 
@@ -65,6 +65,16 @@ export class ActTypeListService {
 
     if (list_in_type_item.length == 0) throw new BadRequestException('ไม่มีรายการในประเภทค่าธรรมเนียมนี้');
     return list_in_type_item;
+  }
+
+  async deleteList(list) {
+    return await this.listFeesRepository.delete(list)
+    .catch(err => { throw new BadRequestException(err) });  //วัตถุออกฤทธิ์ต่อจิตและประสาท
+  }
+
+  async addList(list) {
+    const list_ = await this.listFeesRepository.save(list).catch(err => { throw new BadRequestException("มีรายการนี้ในระบบแล้ว") }); // 
+    return list_;
   }
 
 }
