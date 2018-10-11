@@ -46,6 +46,16 @@ export class ActTypeListService {
     return type_in_act_item;
   }
 
+  async deleteType(type) {
+    return await this.typeFeesRepository.delete(type)
+    .catch(err => { throw new BadRequestException(err) });;  //วัตถุออกฤทธิ์ต่อจิตและประสาท
+  }
+
+  async addType(type) {
+    const type_ = await this.typeFeesRepository.save(type).catch(err => { throw new BadRequestException(err) }); //"มี พรบ ในระบบแล้ว"
+    return type_;
+  }
+
   async ListInType(id_type: number) {
     const list_in_type_item = await this.listFeesRepository
       .createQueryBuilder('list')

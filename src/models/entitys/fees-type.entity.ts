@@ -62,3 +62,11 @@ export class ParamListInType {
     id_type: any;
 }
 
+export class ParamType {
+    id_type?: any;
+    @IsNotEmpty()
+    description?: string;
+
+    id_act?: any;
+}
+
