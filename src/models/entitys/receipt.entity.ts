@@ -11,11 +11,11 @@ export class EReceipt implements IReceipt {
     @PrimaryGeneratedColumn()
     id_receipt?;
 
-    @Column({ name: 'id_person' , nullable: true })
+    @Column({ name: 'id_person', nullable: true })
     @IsNotEmpty()
     id_person: number;
 
-    @Column({ name: 'id_member_create' , nullable: true })
+    @Column({ name: 'id_member_create', nullable: true })
     @IsNotEmpty()
     id_member_create: number;
 
@@ -51,24 +51,24 @@ export class EReceipt implements IReceipt {
     @OneToMany(type => EReceiptDetail, receiptDetail => receiptDetail.receipt)
     receiptDetails: EReceiptDetail[];
 
-    @ManyToOne(type => EPerson, person => person.receipts, { 
-        nullable: true ,
+    @ManyToOne(type => EPerson, person => person.receipts, {
+        nullable: true,
         onDelete: "SET NULL"
     })
     @JoinColumn({ name: 'id_person' })
     person: EPerson;
 
-    @ManyToOne(type => EPerson, person => person.receipts, { 
-        nullable: true ,
+    @ManyToOne(type => EPerson, person => person.receipts, {
+        nullable: true,
         onDelete: "SET NULL"
     })
     @JoinColumn({ name: 'id_member_create' })
     member_create: EPerson;
 
     @ManyToOne(type => EPerson, person => person.receipts, {
-         nullable: true ,
-         onDelete: "SET NULL"
-        })
+        nullable: true,
+        onDelete: "SET NULL"
+    })
     @JoinColumn({ name: 'id_member_cash' })
     member_cash: EPerson;
 
@@ -130,6 +130,19 @@ export class ParamReceipt {
     id_reference: any
 }
 
+export class ParamReceiptPerson {
+    @IsNotEmpty()
+    @IsNumberString()
+    cid: any
+}
+
+export class QueryReceipt {
+    @IsNotEmpty()
+    myDateStart: any;
+    @IsNotEmpty()
+    myDateEnd: any;
+}
+
 export class ParamReceiptDetail {
     @IsNotEmpty()
     id_list: number;
@@ -162,6 +175,18 @@ export class ParamInsertReceipt {
 
     @IsNotEmpty()
     receiptDetails: ParamReceiptDetail[];
+}
+
+export class ParamUpdateCashReceipt {
+
+    @IsNotEmpty()
+    id_receipt: any;
+    @IsNotEmpty()
+    id_receipt_cash: any;
+    @IsNotEmpty()
+    id_receipt_cash_number: any
+    @IsNotEmpty()
+    id_member_cash: any
 }
 
 

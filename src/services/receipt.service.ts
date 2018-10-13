@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, createQueryBuilder } from 'typeorm';
-import { EReceipt, EReceiptDetail, ParamReceiptDetail, ParamDeleteReceiptDetail } from '../models/entitys/receipt.entity';
+import { EReceipt, EReceiptDetail, ParamReceiptDetail, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt } from '../models/entitys/receipt.entity';
 import { EPerson } from '../models/entitys/person.entity';
 import { IReceiptDetail } from '../interfaces/app.interface';
 
@@ -16,31 +16,77 @@ export class ReceiptService {
     private readonly receipt_detailRepository: Repository<EReceiptDetail>,
   ) { }
 
+  async findReceiptDate(query: QueryReceipt) {
+    const receipts = await this.receiptRepository
+      .createQueryBuilder('receipt')
+      .select([
+        "person.firstname",
+        "person.lastname",
+        "person.cid",
+        "receipt.date_created",
+        "receipt.id_reference",
+        "receipt.id_receipt_cash",
+        "receipt.id_receipt_cash_number"
+      ])
+      .leftJoin("receipt.person", "person")
+      .leftJoin("receipt.member_create", "member_create")
+      .leftJoin("receipt.member_cash", "member_cash")
+      .andWhere("receipt.date_created::DATE BETWEEN :start::DATE AND :end::DATE")
+      .setParameter("start", query.myDateStart)
+      .setParameter("end", query.myDateEnd)
+      .getMany();
+
+    return receipts;
+
+  }
+
+  async findReceiptPerson(param: ParamReceiptPerson) {
+    const receipts = await this.receiptRepository
+      .createQueryBuilder('receipt')
+      .select([
+        "person.firstname",
+        "person.lastname",
+        "person.cid",
+        "receipt.date_created",
+        "receipt.id_reference",
+        "receipt.id_receipt_cash",
+        "receipt.id_receipt_cash_number"
+      ])
+      .leftJoin("receipt.person", "person")
+      .leftJoin("receipt.member_create", "member_create")
+      .leftJoin("receipt.member_cash", "member_cash")
+      .andWhere("person.cid =  :cid")
+      .setParameter("cid", param.cid)
+      .getMany();
+
+    return receipts;
+  }
+
   async findReceipt(id_reference: any) {
     //console.log(id_receipt);
     const receipt_item = await this.receiptRepository
       .createQueryBuilder('receipt')
       .select(["person.firstname",
-               "person.lastname",
-               "person.cid",
-               "person.address",
-               "person.mobile",
-               "receipt.place",
-               "receipt.place_address",
-               "receipt.date_created",
-               "receipt.id_receipt",
-               "receipt.id_reference",
-               "receipt.id_receipt_cash",
-               "receipt.id_receipt_cash_number",
-               "receiptDetail.id_receipt_detail",
-               "receiptDetail.description",
-               "receiptDetail.type",
-               "receiptDetail.price",
-               "member_create.firstname",
-               "member_create.lastname",
-               "member_cash.firstname",
-               "member_cash.lastname"
-              ])
+        "person.lastname",
+        "person.cid",
+        "person.address",
+        "person.mobile",
+        "receipt.place",
+        "receipt.place_address",
+        "receipt.date_created",
+        "receipt.id_receipt",
+        "receipt.id_reference",
+        "receipt.id_receipt_cash",
+        "receipt.id_receipt_cash_number",
+        "receiptDetail.id_receipt_detail",
+        "receiptDetail.description",
+        "receiptDetail.type",
+        "receiptDetail.price",
+        "member_create.firstname",
+        "member_create.lastname",
+        "member_cash.firstname",
+        "member_cash.lastname"
+      ])
       .leftJoin("receipt.person", "person")
       .leftJoin("receipt.member_create", "member_create")
       .leftJoin("receipt.member_cash", "member_cash")
@@ -48,7 +94,7 @@ export class ReceiptService {
       .where("receipt.id_reference = :id", { id: id_reference })
       .getOne()
 
-      //console.log(receipt_item);
+    //console.log(receipt_item);
 
     /*const receipt_item = await this.receiptRepository
       .createQueryBuilder('receipt')
@@ -68,7 +114,7 @@ export class ReceiptService {
     return receipt_item;
   }
 
-  
+
 
   async insertReceipt(receipts: any) {
     let receipt = receipts;
@@ -76,16 +122,16 @@ export class ReceiptService {
     delete receipt.receiptDetails;
     let year = new Date().getFullYear();
 
-   receipt = await this.receiptRepository.save(receipt).catch(err => {throw new BadRequestException('receiptRepository1')});
-    receipt.id_reference = year +""+ receipt.id_receipt;
-    receipt  = await this.receiptRepository.save(receipt).catch(err => {throw new BadRequestException('receiptRepository2')});
+    receipt = await this.receiptRepository.save(receipt).catch(err => { throw new BadRequestException('receiptRepository1') });
+    receipt.id_reference = year + "" + receipt.id_receipt;
+    receipt = await this.receiptRepository.save(receipt).catch(err => { throw new BadRequestException('receiptRepository2') });
 
     const receiptDetails = receiptDetailss.map((receiptDetail) => {
       receiptDetail.id_receipt = receipt.id_receipt;
       return receiptDetail;
     })
 
-    const receipt_details = await this.receipt_detailRepository.save(receiptDetails).catch(err => {throw new BadRequestException('receipt_detailRepository')});
+    const receipt_details = await this.receipt_detailRepository.save(receiptDetails).catch(err => { throw new BadRequestException('receipt_detailRepository') });
     receipt.receiptDetails = receipt_details;
 
     return receipt;
@@ -93,8 +139,12 @@ export class ReceiptService {
     /*const id_receipt = Object.keys(identifiers).map(key => identifiers[key])[0];*/
   }
 
-  async deleteReceiptDetail(receipt_detail: ParamDeleteReceiptDetail){
+  async deleteReceiptDetail(receipt_detail: ParamDeleteReceiptDetail) {
     return await this.receipt_detailRepository.delete(receipt_detail);
+  }
+
+  async updateReceipt(receipt: ParamUpdateCashReceipt){
+    return await this.receiptRepository.save(receipt);
   }
 
 
