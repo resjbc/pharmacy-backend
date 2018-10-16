@@ -143,6 +143,11 @@ export class QueryReceipt {
     myDateEnd: any;
 }
 
+export class QueryReceiptCash {
+    id_receipt_cash?: any;
+    id_receipt_cash_number?: any;
+}
+
 export class ParamReceiptDetail {
     @IsNotEmpty()
     id_list: number;

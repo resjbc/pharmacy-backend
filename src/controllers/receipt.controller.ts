@@ -1,25 +1,32 @@
-import { Controller, Get, Post, Body, BadRequestException, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, BadRequestException, Param, Delete, Query, UseGuards } from '@nestjs/common';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { ReceiptService } from 'services/receipt.service';
-import { ParamReceipt, ParamInsertReceipt, ParamReceiptDetail, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt } from '../models/entitys/receipt.entity';
+import { ParamReceipt, ParamInsertReceipt, ParamReceiptDetail, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt, QueryReceiptCash } from '../models/entitys/receipt.entity';
 import { IReceiptDetail } from '../interfaces/app.interface';
+import { AuthGuard } from '@nestjs/passport';
 
 
 
 @Controller('receipt')
+@UseGuards(AuthGuard('jwt'))
 export class ReceiptController {
     constructor(private readonly receiptService: ReceiptService) { }
 
-    @Get(':id_reference')
-    findReceipt(@Param(new ValidationPipe()) param: ParamReceipt) {
-        //console.log(param.id);
-        return this.receiptService.findReceipt(param.id_reference);
-    }
-
+    
     @Get()
     findReceiptDate(@Query(new ValidationPipe()) query: QueryReceipt) {
         //console.log(param.id);
         return this.receiptService.findReceiptDate(query);
+    }
+
+    @Get('cash?')
+    findReceiptCash(@Query() query: QueryReceiptCash) {
+        return this.receiptService.findReceiptCash(query);
+    }
+
+    @Get(':id_reference')
+    findReceipt(@Param(new ValidationPipe()) param: ParamReceipt) {
+        return this.receiptService.findReceipt(param.id_reference);
     }
 
 

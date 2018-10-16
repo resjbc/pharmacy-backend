@@ -3,7 +3,7 @@ import { IPerson, RoleAccount } from '../../interfaces/app.interface';
 import { IsNotEmpty, IsNumberString, Matches } from 'class-validator';
 import { EReceipt } from './receipt.entity';
 import { EPlace } from './place.entity';
-import { IsRoleAccount } from '../../pipes/validation.pipe';
+import { IsRoleAccount, IsComparePassword } from '../../pipes/validation.pipe';
 
 
 @Unique(["cid"])
@@ -84,4 +84,25 @@ export class ParamDeletePerson {
     @IsNotEmpty()
     @IsNumberString()
     id_person?: any;
+}
+
+export class ParamLogin {
+    @IsNotEmpty()
+    username?: string;
+    @IsNotEmpty()
+    password?: string;
+}
+
+export class ParamChangePassword   {
+    @IsNotEmpty() 
+    old_pass: string;    
+
+    @IsNotEmpty() 
+    @Matches(/^[A-z0-9]{6,15}$/)
+    new_pass: string;
+
+    @IsNotEmpty() 
+    @IsComparePassword('new_pass')
+    cnew_pass: string;
+
 }

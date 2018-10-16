@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, createQueryBuilder } from 'typeorm';
-import { EReceipt, EReceiptDetail, ParamReceiptDetail, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt } from '../models/entitys/receipt.entity';
+import { EReceipt, EReceiptDetail, ParamReceiptDetail, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt, QueryReceiptCash } from '../models/entitys/receipt.entity';
 import { EPerson } from '../models/entitys/person.entity';
 import { IReceiptDetail } from '../interfaces/app.interface';
 
@@ -143,8 +143,44 @@ export class ReceiptService {
     return await this.receipt_detailRepository.delete(receipt_detail);
   }
 
-  async updateReceipt(receipt: ParamUpdateCashReceipt){
+  async updateReceipt(receipt: ParamUpdateCashReceipt) {
     return await this.receiptRepository.save(receipt);
+  }
+
+
+  async findReceiptCash(query: QueryReceiptCash) {
+
+    let findReceipt_ = () => this.receiptRepository
+      .createQueryBuilder('receipt')
+      .select([
+        "person.firstname",
+        "person.lastname",
+        "person.cid",
+        "receipt.date_created",
+        "receipt.id_reference",
+        "receipt.id_receipt_cash",
+        "receipt.id_receipt_cash_number"
+      ])
+      .leftJoin("receipt.person", "person")
+      .leftJoin("receipt.member_create", "member_create")
+      .leftJoin("receipt.member_cash", "member_cash")
+
+    if (query.id_receipt_cash && query.id_receipt_cash_number) {
+      return await findReceipt_()
+        .where("receipt.id_receipt_cash = :id_receipt_cash", { id_receipt_cash: query.id_receipt_cash })
+        .andWhere("receipt.id_receipt_cash_number = :id_receipt_cash_number", { id_receipt_cash_number: query.id_receipt_cash_number }).getMany();
+    }
+    else if (query.id_receipt_cash_number) {
+      return await findReceipt_()
+        .where("receipt.id_receipt_cash_number = :id_receipt_cash_number", { id_receipt_cash_number: query.id_receipt_cash_number }).getMany();
+    }
+    else if (query.id_receipt_cash) {
+      return await findReceipt_()
+        .where("receipt.id_receipt_cash = :id_receipt_cash", { id_receipt_cash: query.id_receipt_cash }).getMany();
+    }
+    else throw new BadRequestException('ใส่เลขที่ใบเสร็จหรือเล่มที่');
+
+
   }
 
 
