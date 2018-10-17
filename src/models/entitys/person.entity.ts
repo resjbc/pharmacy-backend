@@ -9,7 +9,10 @@ import { IsRoleAccount, IsComparePassword } from '../../pipes/validation.pipe';
 @Unique(["cid"])
 @Entity('Person')
 export class EPerson implements IPerson {
-
+    
+constructor(){
+    
+}
 
     @PrimaryGeneratedColumn()
     id_person?;

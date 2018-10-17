@@ -25,6 +25,14 @@ export class PersonService {
 
   async getPersons() {
     const persons = await this.personRepository.createQueryBuilder('person')
+    .select().where("role != 4").orderBy("person.id_person","DESC").getMany();
+     
+    if (!persons) throw new BadRequestException('ไม่มีบุคคลในระบบ');
+    return persons;
+  }
+
+  async getPersons_Admin() {
+    const persons = await this.personRepository.createQueryBuilder('person')
     .select().orderBy("person.id_person","DESC").getMany();
      
     if (!persons) throw new BadRequestException('ไม่มีบุคคลในระบบ');
@@ -36,7 +44,9 @@ export class PersonService {
      const person_ =  await this.personRepository.findOne({username:person.username}).catch(err => { throw new BadRequestException("เกิดข้อพิดพลาดลองใหม่อีกครั้ง") });
     if(person_ && person_.cid !== person.cid) throw new BadRequestException("username นี้มีผู้ใช้แล้ว")
     }
-    const member = await this.personRepository.save(person).catch(err => { throw new BadRequestException("มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว") });
+    const member = await this.personRepository.save(person).catch(err => { 
+      throw new BadRequestException("มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว") 
+    });
     return member;
   }
 

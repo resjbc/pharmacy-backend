@@ -1,7 +1,7 @@
 import { Controller, Post, Body, ValidationPipe, Get, Req, UseGuards } from "@nestjs/common";
 import { ParamLogin, ParamChangePassword } from "models/entitys/person.entity";
 import { AccountService } from "services/account.service";
-import { IPerson } from "interfaces/app.interface";
+import { IPerson, RoleAccount } from "interfaces/app.interface";
 import { Request } from "express";
 import { AuthGuard } from "@nestjs/passport";
 
@@ -18,7 +18,7 @@ export class AccountController {
     @Get('data') // แสดงข้อมูลผู้ใช้งานที่เข้าสู่ระบบ
     @UseGuards(AuthGuard('jwt'))
     getUserLogin(@Req() req: Request) {
-        const userLogin: IPerson = req.user as any;
+        const userLogin: IPerson = req.user as IPerson;
         // console.log(req);
         userLogin.username = '';
         userLogin.password = '';
