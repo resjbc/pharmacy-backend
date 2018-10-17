@@ -1,11 +1,11 @@
 import { Controller, Get, Param, Delete, Post, Body, UseGuards } from "@nestjs/common";
-import { ActTypeListService } from "services/act_type_list.service";
+import { ActTypeListService } from "../services/act_type_list.service";
 import { ParamTypeInAct, ParamListInType, ParamType, ParamDeleteType, ParamDeleteList, ParamList } from "../models/entitys/fees-type.entity";
 import { ValidationPipe } from "../pipes/validation.pipe";
 import { ParamAct, ParamDeleteAct } from "../models/entitys/act.entity";
 import { AuthGuard } from "@nestjs/passport";
-import { RoleGuard } from "guards/role.gurad";
-import { RoleAccount } from "interfaces/app.interface";
+import { RoleGuard } from "../guards/role.gurad";
+import { RoleAccount } from "../interfaces/app.interface";
 
 
 @Controller('act_type_list')

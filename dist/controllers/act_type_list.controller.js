@@ -13,13 +13,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const act_type_list_service_1 = require("services/act_type_list.service");
+const act_type_list_service_1 = require("../services/act_type_list.service");
 const fees_type_entity_1 = require("../models/entitys/fees-type.entity");
 const validation_pipe_1 = require("../pipes/validation.pipe");
 const act_entity_1 = require("../models/entitys/act.entity");
 const passport_1 = require("@nestjs/passport");
-const role_gurad_1 = require("guards/role.gurad");
-const app_interface_1 = require("interfaces/app.interface");
+const role_gurad_1 = require("../guards/role.gurad");
+const app_interface_1 = require("../interfaces/app.interface");
 let ActTypeListController = class ActTypeListController {
     constructor(act_type_listService) {
         this.act_type_listService = act_type_listService;

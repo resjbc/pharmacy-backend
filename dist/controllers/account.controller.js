@@ -13,8 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const person_entity_1 = require("models/entitys/person.entity");
-const account_service_1 = require("services/account.service");
+const person_entity_1 = require("../models/entitys/person.entity");
+const account_service_1 = require("../services/account.service");
 const passport_1 = require("@nestjs/passport");
 let AccountController = class AccountController {
     constructor(account) {

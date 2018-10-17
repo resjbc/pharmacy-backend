@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, BadRequestException, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards } from '@nestjs/common';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { ParamPerson, ParamAddPerson, ParamDeletePerson, ParamLogin } from '../models/entitys/person.entity';
 import { PersonService } from '../services/person.service';
 import { AuthGuard } from '@nestjs/passport';
-import { RoleGuard } from 'guards/role.gurad';
-import { RoleAccount } from 'interfaces/app.interface';
+import { RoleGuard } from '../guards/role.gurad';
+import { RoleAccount } from '../interfaces/app.interface';
 
 
 

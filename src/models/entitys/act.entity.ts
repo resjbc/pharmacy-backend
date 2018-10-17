@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany, Unique } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, Unique } from "typeorm";
 import { IsNotEmpty, IsNumberString } from "class-validator";
 import { IAct } from "../../interfaces/app.interface";
 import { ETypeFees } from "./fees-type.entity";

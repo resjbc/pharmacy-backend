@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, BadRequestException, Param, Delete, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query, UseGuards } from '@nestjs/common';
 import { ValidationPipe } from '../pipes/validation.pipe';
-import { ReceiptService } from 'services/receipt.service';
-import { ParamReceipt, ParamInsertReceipt, ParamReceiptDetail, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt, QueryReceiptCash } from '../models/entitys/receipt.entity';
-import { IReceiptDetail, RoleAccount } from '../interfaces/app.interface';
+import { ReceiptService } from '../services/receipt.service';
+import { ParamReceipt, ParamInsertReceipt, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt, QueryReceiptCash } from '../models/entitys/receipt.entity';
+import { RoleAccount } from '../interfaces/app.interface';
 import { AuthGuard } from '@nestjs/passport';
-import { RoleGuard } from 'guards/role.gurad';
+import { RoleGuard } from '../guards/role.gurad';
 
 
 

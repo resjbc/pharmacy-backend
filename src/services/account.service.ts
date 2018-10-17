@@ -1,10 +1,10 @@
 import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { EPerson, ParamLogin } from "models/entitys/person.entity";
+import { EPerson, ParamLogin } from "../models/entitys/person.entity";
 import { generate, verify } from 'password-hash';
 import { JwtAuthenService } from "./jwt-authen.service";
-import { IChangePassword, IPerson } from "interfaces/app.interface";
+import { IChangePassword, IPerson } from "../interfaces/app.interface";
 
 @Injectable()
 export class AccountService {

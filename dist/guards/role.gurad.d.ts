@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext } from "@nestjs/common";
-import { RoleAccount } from "interfaces/app.interface";
+import { RoleAccount } from "../interfaces/app.interface";
 import { Observable } from "rxjs";
 export declare class RoleGuard implements CanActivate {
     private roles;

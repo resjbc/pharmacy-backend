@@ -18,9 +18,9 @@ const act_type_list_service_1 = require("../services/act_type_list.service");
 const act_type_list_controller_1 = require("../controllers/act_type_list.controller");
 const person_controller_1 = require("../controllers/person.controller");
 const person_service_1 = require("../services/person.service");
-const account_controller_1 = require("controllers/account.controller");
-const account_service_1 = require("services/account.service");
-const jwt_authen_service_1 = require("services/jwt-authen.service");
+const account_controller_1 = require("../controllers/account.controller");
+const account_service_1 = require("../services/account.service");
+const jwt_authen_service_1 = require("../services/jwt-authen.service");
 let ModelsModule = class ModelsModule {
 };
 ModelsModule = __decorate([

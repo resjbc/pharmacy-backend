@@ -1,6 +1,6 @@
-import { ParamLogin, ParamChangePassword } from "models/entitys/person.entity";
-import { AccountService } from "services/account.service";
-import { IPerson } from "interfaces/app.interface";
+import { ParamLogin, ParamChangePassword } from "../models/entitys/person.entity";
+import { AccountService } from "../services/account.service";
+import { IPerson } from "../interfaces/app.interface";
 import { Request } from "express";
 export declare class AccountController {
     private readonly account;

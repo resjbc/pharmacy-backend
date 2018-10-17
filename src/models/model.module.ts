@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EReceipt, EReceiptDetail } from './entitys/receipt.entity';
 import { EAct } from './entitys/act.entity';
@@ -11,9 +10,9 @@ import { ActTypeListService } from '../services/act_type_list.service';
 import { ActTypeListController } from '../controllers/act_type_list.controller';
 import { PersonController } from '../controllers/person.controller';
 import { PersonService } from '../services/person.service';
-import { AccountController } from 'controllers/account.controller';
-import { AccountService } from 'services/account.service';
-import { JwtAuthenService, JwtAuthenStrategy } from 'services/jwt-authen.service';
+import { AccountController } from '../controllers/account.controller';
+import { AccountService } from '../services/account.service';
+import { JwtAuthenService, JwtAuthenStrategy } from '../services/jwt-authen.service';
 
 
 

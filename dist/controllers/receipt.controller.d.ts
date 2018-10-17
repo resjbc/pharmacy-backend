@@ -1,4 +1,4 @@
-import { ReceiptService } from 'services/receipt.service';
+import { ReceiptService } from '../services/receipt.service';
 import { ParamReceipt, ParamInsertReceipt, ParamDeleteReceiptDetail, QueryReceipt, ParamReceiptPerson, ParamUpdateCashReceipt, QueryReceiptCash } from '../models/entitys/receipt.entity';
 export declare class ReceiptController {
     private readonly receiptService;

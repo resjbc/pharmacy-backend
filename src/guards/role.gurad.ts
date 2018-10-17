@@ -1,5 +1,5 @@
 import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
-import { RoleAccount, IPerson } from "interfaces/app.interface";
+import { RoleAccount, IPerson } from "../interfaces/app.interface";
 import { Observable } from "rxjs";
 
 @Injectable()

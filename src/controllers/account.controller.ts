@@ -1,7 +1,7 @@
 import { Controller, Post, Body, ValidationPipe, Get, Req, UseGuards } from "@nestjs/common";
-import { ParamLogin, ParamChangePassword } from "models/entitys/person.entity";
-import { AccountService } from "services/account.service";
-import { IPerson, RoleAccount } from "interfaces/app.interface";
+import { ParamLogin, ParamChangePassword } from "../models/entitys/person.entity";
+import { AccountService } from "../services/account.service";
+import { IPerson } from "../interfaces/app.interface";
 import { Request } from "express";
 import { AuthGuard } from "@nestjs/passport";
 

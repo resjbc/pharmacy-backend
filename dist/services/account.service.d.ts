@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
-import { EPerson, ParamLogin } from "models/entitys/person.entity";
+import { EPerson, ParamLogin } from "../models/entitys/person.entity";
 import { JwtAuthenService } from "./jwt-authen.service";
-import { IChangePassword } from "interfaces/app.interface";
+import { IChangePassword } from "../interfaces/app.interface";
 export declare class AccountService {
     private readonly personRepository;
     private authenService;

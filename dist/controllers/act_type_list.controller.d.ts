@@ -1,4 +1,4 @@
-import { ActTypeListService } from "services/act_type_list.service";
+import { ActTypeListService } from "../services/act_type_list.service";
 import { ParamTypeInAct, ParamListInType, ParamType, ParamDeleteType, ParamDeleteList, ParamList } from "../models/entitys/fees-type.entity";
 import { ParamAct, ParamDeleteAct } from "../models/entitys/act.entity";
 export declare class ActTypeListController {

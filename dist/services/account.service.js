@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const person_entity_1 = require("models/entitys/person.entity");
+const person_entity_1 = require("../models/entitys/person.entity");
 const jwt_authen_service_1 = require("./jwt-authen.service");
 let AccountService = class AccountService {
     constructor(personRepository, authenService) {

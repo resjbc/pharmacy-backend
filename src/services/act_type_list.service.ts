@@ -1,8 +1,8 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { Injectable, BadRequestException } from "@nestjs/common";
-import { EAct } from "models/entitys/act.entity";
+import { EAct } from "../models/entitys/act.entity";
 import { Repository } from "typeorm";
-import { ETypeFees, EListFees } from "models/entitys/fees-type.entity";
+import { ETypeFees, EListFees } from "../models/entitys/fees-type.entity";
 
 @Injectable()
 export class ActTypeListService {

@@ -17,8 +17,8 @@ const validation_pipe_1 = require("../pipes/validation.pipe");
 const person_entity_1 = require("../models/entitys/person.entity");
 const person_service_1 = require("../services/person.service");
 const passport_1 = require("@nestjs/passport");
-const role_gurad_1 = require("guards/role.gurad");
-const app_interface_1 = require("interfaces/app.interface");
+const role_gurad_1 = require("../guards/role.gurad");
+const app_interface_1 = require("../interfaces/app.interface");
 let PersonController = class PersonController {
     constructor(personService) {
         this.personService = personService;
