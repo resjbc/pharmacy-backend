@@ -1,2 +1,0 @@
-INSERT INTO "Person"("id_person", "cid", "firstname", "lastname", "address", "mobile", "username", "password", "role") VALUES (2, '1969900258447', 'valid', 'dulyakul', '30/6', '0856585854', NULL, NULL, 1);
-INSERT INTO "Person"("id_person", "cid", "firstname", "lastname", "address", "mobile", "username", "password", "role") VALUES (1, '1969900168224', 'idres', 'dulyakul', 'สสจ ปัตานี', '0828292457', '', '', 3);

@@ -1,9 +1,0 @@
-INSERT INTO "Act"("id_act", "description") VALUES (1, 'อาหาร');
-INSERT INTO "Act"("id_act", "description") VALUES (2, 'ยา');
-INSERT INTO "Act"("id_act", "description") VALUES (3, 'เครื่องสำอาง');
-INSERT INTO "Act"("id_act", "description") VALUES (4, 'เครื่องมือแพทย์');
-INSERT INTO "Act"("id_act", "description") VALUES (5, 'วัตถุอันตราย');
-INSERT INTO "Act"("id_act", "description") VALUES (6, 'วัตถุออกฤทธิ์ต่อจิตและประสาท');
-INSERT INTO "Act"("id_act", "description") VALUES (7, 'สถานพยาบาล');
-INSERT INTO "Act"("id_act", "description") VALUES (8, 'การประกอบโรคศิลปะ');
-INSERT INTO "Act"("id_act", "description") VALUES (9, 'สถานประกอบการนวดเพื่อสุขภาพ');
