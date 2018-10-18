@@ -63,13 +63,14 @@ let PersonService = class PersonService {
     addPerson(person) {
         return __awaiter(this, void 0, void 0, function* () {
             if (person.username) {
-                const person_ = yield this.personRepository.findOne({ username: person.username }).catch(err => { throw new common_1.BadRequestException("เกิดข้อพิดพลาดลองใหม่อีกครั้ง"); });
+                const person_ = yield this.personRepository.findOne({ username: person.username });
                 if (person_ && person_.cid !== person.cid)
                     throw new common_1.BadRequestException("username นี้มีผู้ใช้แล้ว");
             }
-            const member = yield this.personRepository.save(person).catch(err => {
+            const person_ = yield this.personRepository.findOne({ cid: person.cid });
+            if (person_ && person_.id_person !== person.id_person)
                 throw new common_1.BadRequestException("มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว");
-            });
+            const member = yield this.personRepository.save(person);
             return member;
         });
     }
