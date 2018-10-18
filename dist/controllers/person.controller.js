@@ -22,7 +22,7 @@ const app_interface_1 = require("../interfaces/app.interface");
 let PersonController = class PersonController {
     constructor(personService) {
         this.personService = personService;
-        this.personService.addPerson({
+        this.personService.firstStart({
             id_person: 1,
             cid: "9999999999999",
             firstname: "ADMIN",

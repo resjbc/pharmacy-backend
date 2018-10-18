@@ -48,7 +48,9 @@ let JwtAuthenService = class JwtAuthenService {
                     .getOne();
                 return member;
             }
-            catch (ex) { }
+            catch (ex) {
+                console.log(ex);
+            }
             return null;
         });
     }

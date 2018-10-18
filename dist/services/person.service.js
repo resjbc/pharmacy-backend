@@ -81,6 +81,13 @@ let PersonService = class PersonService {
             ;
         });
     }
+    firstStart(person) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const person_ = yield this.personRepository.findOne({ cid: person.cid });
+            if (!person_)
+                yield this.personRepository.save(person);
+        });
+    }
 };
 PersonService = __decorate([
     common_1.Injectable(),

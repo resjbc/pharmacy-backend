@@ -59,6 +59,11 @@ export class PersonService {
       .catch(err => { throw new BadRequestException(err) });;
   }
 
+  async firstStart(person) {
+    const person_ = await this.personRepository.findOne({ cid: person.cid });
+    if (!person_) await this.personRepository.save(person);
+  }
+
 
 
 }

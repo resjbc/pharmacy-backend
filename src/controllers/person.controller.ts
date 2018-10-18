@@ -13,7 +13,7 @@ import { RoleAccount } from '../interfaces/app.interface';
 @UseGuards(AuthGuard('jwt'))
 export class PersonController {
   constructor(private readonly personService: PersonService) {
-    this.personService.addPerson({
+    this.personService.firstStart({
       id_person: 1,
       cid: "9999999999999",
       firstname: "ADMIN",

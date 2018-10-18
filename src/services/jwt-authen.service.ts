@@ -35,7 +35,9 @@ export class JwtAuthenService implements IAuthen {
                 .getOne();
             //console.log(member);
             return member;
-        } catch (ex) { }
+        } catch (ex) { 
+            console.log(ex);
+        }
         return null
     }
 
@@ -55,6 +57,8 @@ export class JwtAuthenStrategy extends PassportStrategy(Strategy) {
         const user = await this.authService.validateUser(payload);
         if (!user) {
             throw new UnauthorizedException('กรุณาล็อกอินใหม่');
+           //"dist/models/entitys/**/*.js"
+           //"src/models/entitys/**/*.ts"
         }
         return user;
     }
